@@ -1,4 +1,5 @@
 #  List of Actions in run_analysis.R ................................................
+# IMPORTANT: Before sourcing run_analysis.R load "plyr" "knit" libraries
 # 1.  Applying directories and files
 # 1.1 Loading raw data...............................................................
 # 2.  Merging training and test sets to create one data set
@@ -12,7 +13,8 @@
 # 5.2 Applying syntactically valid names.............................................
 # 5.3 Applying reader friendly names.................................................
 # 6.  Creating a second a organized data set 
-#     with the means of each variable for activities and subjects.
+#     with the means of each variable for activities and subjects and writing to a
+#     new file UCITidyData.txt
 #
 # Thanks to the useful information found in the links below:
 #
@@ -20,8 +22,6 @@
 # https://bitbucket.org/maurotrb/getting-cleaning-data-2014-project/src
 # https://github.com/yihui/knitr/tree/master/vignettes
 # 
-
-require(plyr)
 
 #......................................................................................
 # 1. Applying directories and files
@@ -132,8 +132,9 @@ names(sensorDataMeanStd) <- gsub('Freq\\.',"Frequency.",names(sensorDataMeanStd)
 names(sensorDataMeanStd) <- gsub('Freq$',"Frequency",names(sensorDataMeanStd))
 
 #.....................................................................................
-# 6. Creating a second a organized data set 
-# with the means of each variable for activities and subjects.
+# 6. Creating a second a organized data set with the means
+#  of each variable for activities and subjects and writing to a
+#  new file UCITidyData.txt
 #.....................................................................................
 
 sensorAvgActSub = ddply(sensorDataMeanStd, c("Subject","Activity"), numcolwise(mean))
